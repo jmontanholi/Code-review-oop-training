@@ -30,7 +30,7 @@ def create_student(list)
   puts "\nEnter the name of the student"
   name = gets.chomp
   name == '' ? false : name
-  puts 'The person has partent_permission?'
+  puts 'The person has parent_permission?'
   puts '(0) No permission'
   puts '(1) Permission'
   permission = gets.chomp
