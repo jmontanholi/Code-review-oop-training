@@ -15,7 +15,7 @@ class App
     puts '6 - List all rentals for a given person id'
     puts '7 - Exit'
   end
-  
+
   def input_process(input, book_list, people_list, rentals_list)
     case input.to_i
     when 1
@@ -36,13 +36,13 @@ class App
     main(book_list, people_list, rentals_list)
   end
 
-  private 
+  private
 
   def add_to_list(list, item)
     list << item
     'Created sucessfully'
   end
-  
+
   def create_book(list)
     puts "\nEnter a book title"
     title = gets.chomp
@@ -51,14 +51,14 @@ class App
     book = Book.new(title, author)
     add_to_list(list, book)
   end
-  
+
   def create_person(list)
     puts "\n Do you want to create a (0) Student or a (1) Teacher?"
     input = gets.chomp
     create_student(list) if input == '0'
     create_teacher(list) if input == '1'
   end
-  
+
   def create_student(list)
     puts "\nEnter the age of the student"
     age = gets.chomp
@@ -72,7 +72,7 @@ class App
     student = Student.new(age, 'none', name, parent_permission: permission == 1)
     add_to_list(list, student)
   end
-  
+
   def create_teacher(list)
     puts "\nEnter the age of the teacher"
     age = gets.chomp
@@ -84,23 +84,23 @@ class App
     teacher = Teacher.new(spec, age, name)
     add_to_list(list, teacher)
   end
-  
+
   def validate_num(input, list)
     return unless input.to_i > (list.length - 1) || input == ''
-  
+
     puts 'Please enter a valid number'
     input = gets.chomp
     validate_num(input, list)
   end
-  
+
   def validate_date(input)
     return unless input == ''
-  
+
     puts 'Please enter a valid number'
     input = gets.chomp
     validate_date(input)
   end
-  
+
   def create_rental(list, book_list, people_list)
     puts "\nChoose a book from the list"
     book_list.each { |b| puts "(#{book_list.index(b)}) Title: '#{b.title}' Author: '#{b.author}'" }
@@ -122,25 +122,24 @@ class App
     puts 'Created successfully'
     add_to_list(list, rental)
   end
-  
+
   def show_books(list)
     list.each { |b| puts "\nTitle: '#{b.title}' Author: '#{b.author}'" }
   end
-  
+
   def show_people(list)
     list.each { |person| puts "\n[#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
   end
-  
+
   def show_rentals(list)
     puts "\nPlease enter the id of the person"
     id = gets.chomp
-  
+
     puts "\nRentals:"
     list.each do |r|
       puts "Date: #{r.date}, Book: '#{r.book.title}', Author: '#{r.book.author}'" if id.to_i == r.person.id
     end
   end
-
 end
 
 def main(book_list_input = [], people_list_input = [], rentals_list_input = [])
